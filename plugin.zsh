@@ -45,7 +45,7 @@ favorite-directories:cd() {
 }
 
 favorite-directories:get() {
-    :
+    cat $FAV_DIRECTORIES_LIST_FILE
 }
 
 zle -N favorite-directories:cd
