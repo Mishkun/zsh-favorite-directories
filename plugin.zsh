@@ -2,20 +2,20 @@ favorite-directories:cd() {
     # eval prevents IFS to modify in global scope
     IFS=$'\n' eval 'local sources=($(favorite-directories:get))'
 
-    local name
     local maxdepth
     local mindepth
     local dir
 
+    echo $sources
+
     local target_dir=$({
         for source in "${sources[@]}"; do
-            read -r name maxdepth dir mindepth <<< "$source"
+            read -r dir maxdepth mindepth <<< "$source"
 
             find -L "$dir" \
                 -maxdepth "${maxdepth:-1}" \
                 -mindepth "${mindepth:-1}" \
-                -type d -printf "$name: %P\\n" \
-                2>/dev/null
+                -type d
         done
     } | fzf-tmux)
 
