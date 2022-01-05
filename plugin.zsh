@@ -11,7 +11,7 @@ favorite-directories:cd() {
         for source in "${sources[@]}"; do
             read -r name maxdepth dir mindepth <<< "$source"
 
-            find "$dir" \
+            find -L "$dir" \
                 -maxdepth "${maxdepth:-1}" \
                 -mindepth "${mindepth:-1}" \
                 -type d -printf "$name: %P\\n" \
