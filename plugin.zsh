@@ -13,7 +13,7 @@ favorite-directories:cd() {
             find -L "$dir" \
                 -maxdepth "${maxdepth:-1}" \
                 -mindepth "${mindepth:-1}" \
-                -type d
+                -type d 2> /dev/null
         done
     } | fzf --height 40% --reverse)
 
