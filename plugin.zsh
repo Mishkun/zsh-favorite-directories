@@ -6,8 +6,6 @@ favorite-directories:cd() {
     local mindepth
     local dir
 
-    echo $sources
-
     local target_dir=$({
         for source in "${sources[@]}"; do
             read -r dir maxdepth mindepth <<< "$source"
@@ -17,19 +15,9 @@ favorite-directories:cd() {
                 -mindepth "${mindepth:-1}" \
                 -type d
         done
-    } | fzf-tmux)
+    } | fzf --height 40% --reverse)
 
-    local token=${target_dir//:*/}
-    local target_dir=${target_dir//*: /}
-
-    for source in "${sources[@]}"; do
-        read -r name maxdepth dir mindepth <<< "$source"
-
-        if [ "$name" = "$token" ]; then
-            eval cd "$dir/$target_dir"
-            break
-        fi
-    done
+    eval cd "$target_dir"
 
     unset sources
     unset maxdepth
