@@ -24,16 +24,9 @@ favorite-directories:cd() {
     unset dir
     unset target_dir
     unset token
-
-    for func in "${precmd_functions[@]}"; do
-        "$func"
-    done
-
-    zle reset-prompt
 }
 
 favorite-directories:get() {
     cat $FAV_DIRECTORIES_LIST_FILE
 }
 
-zle -N favorite-directories:cd
