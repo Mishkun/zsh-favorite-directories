@@ -24,9 +24,12 @@ favorite-directories:cd() {
     unset dir
     unset target_dir
     unset token
+
+    zle reset-prompt
 }
 
 favorite-directories:get() {
     cat $FAV_DIRECTORIES_LIST_FILE
 }
 
+zle -N favorite-directories:cd
